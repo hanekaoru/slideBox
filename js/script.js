@@ -10,7 +10,7 @@ window.onload = function() {
     var interval = 3000;
     var timer;
 
-
+    // 运动函数
     function animate(offset) {
         if (offset == 0) {
             return;
@@ -21,6 +21,7 @@ window.onload = function() {
         var speed = offset / (time / inteval);
         var left = parseInt(list.style.left) + offset;
 
+        // 缓慢运动
         var go = function() {
             if ((speed > 0 && parseInt(list.style.left) < left) || (speed < 0 && parseInt(list.style.left) > left)) {
                 list.style.left = parseInt(list.style.left) + speed + "px";
@@ -40,6 +41,7 @@ window.onload = function() {
         go();
     }
 
+    // 对应按钮显示
     function showButton() {
         for (var i = 0; i < buttons.length; i++) {
             if (buttons[i].className == "on") {
@@ -50,16 +52,20 @@ window.onload = function() {
         buttons[index - 1].className = "on";
     }
 
+    // 自动播放
     function play() {
         timer = setTimeout(function() {
             next.onclick();
             play();
         }, interval);
     }
+
+    // 暂停
     function stop() {
         clearTimeout(timer);
     }
 
+    // 下一页按钮事件
     next.onclick = function() {
         if (animated) {
             return;
@@ -73,6 +79,8 @@ window.onload = function() {
         animate(-600);
         showButton();
     }
+
+    // 上一页按钮事件
     prev.onclick = function() {
         if (animated) {
             return;
@@ -87,6 +95,7 @@ window.onload = function() {
         showButton();
     }
 
+    // 底部按钮点击事件
     for (var i = 0; i < buttons.length; i++) {
         buttons[i].onclick = function() {
             if (animated) {
